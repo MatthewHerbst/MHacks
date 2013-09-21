@@ -5,10 +5,12 @@ $PASSWORD = 'et2012am';
 $DB='Mhacks';
 
 $USER_TABLE = 'Users';
-$USERNAME_MAX_SIZE = 30;
+$USERNAME_MAX_SIZE = 25;
 $USERNAME_MIN_SIZE = 3;
-$PASSWORD_MAX_SIZE = 30;
+$PASSWORD_MAX_SIZE = 20;
 $PASSWORD_MIN_SIZE = 3;
+$EMAIL_MAX_SIZE = 255;
+$EMAIL_MIN_SIZE = 5;
 /************** END CONFIGURATION *************/
 
 /*
@@ -23,8 +25,7 @@ function connectDB() {
 }
 
 /*
-Validate a user - check the password - returns the primary key if successful
-or -1 if failed.
+Validate a user - check the password - returns the primary key if successful or -1 if failed
 */
 function validateUser($user, $password) {
 	global $USER_TABLE;
@@ -40,7 +41,7 @@ function validateUser($user, $password) {
 	}
 
 	//Run the query on the database
-	$query = "select pk, password from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
+	$query = "select id, password from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
 	$q = mysql_query($query);
 	if(!$q) {
 		return -1;
@@ -48,8 +49,8 @@ function validateUser($user, $password) {
 	$r = mysql_fetch_array($q);
 	if($r && $r['password'] != crypt($password, $user)) {
 	    return -1;
-	} else if ($r && $r['pk'] > 0) {
-		return $r['pk'];
+	} else if ($r && $r['id'] > 0) {
+		return $r['id'];
 	} else {
 		return -1;
 	}
@@ -62,13 +63,11 @@ function checkUserExist($user) {
 	global $USER_TABLE;
 
 	//Run the query on the database
-	$sql = "select pk from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
+	$sql = "select id from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
 	$q = mysql_query($sql);
 
 	//Check if there was an error running the query
 	if(mysql_error()) {
-		print "Error checking if username " . $user . " exists. Please contact the site administrator.";
-		print mysql_error();
 		return false;
 	}
 
@@ -79,40 +78,86 @@ function checkUserExist($user) {
 
 	//Check query results
 	$r = mysql_fetch_array($q);
-	return ($r && $r['pk'] > 0);
+	return ($r && $r['id'] > 0);
 }
 
 /*
-Add a new user to the system. Returns 1 if this succeeds, or the error message otherwise.
+Checks to see if a username is in the system
 */
-function addUser($user, $password) {
+function checkEmailExist($email) {
+	global $USER_TABLE;
+
+	//Run the query on the database
+	$sql = "select id from ". $USER_TABLE . " where email = '" . mysql_real_escape_string($email) . "'";
+	$q = mysql_query($sql);
+
+	//Check if there was an error running the query
+	if(mysql_error()) {
+		return false;
+	}
+
+	//Check if the query has results
+	if(!$q) {
+		return false;
+	}
+
+	//Check query results
+	$r = mysql_fetch_array($q);
+	return ($r && $r['id'] > 0);
+}
+
+/*
+Add a new user to the system. Returns true if this succeeds, the error message otherwise
+*/
+function addUser($user, $password, $email = "") {
 	global $USER_TABLE;
 	global $USERNAME_MAX_SIZE;
 	global $PASSWORD_MAX_SIZE;
 	global $USERNAME_MIN_SIZE;
 	global $PASSWORD_MIN_SIZE;
+	global $EMAIL_MAX_SIZE;
+	global $EMAIL_MIN_SIZE;
 
 	//Check username rules
 	if(!ctype_alnum($user) || strlen($user) > $USERNAME_MAX_SIZE || strlen($user) < $USERNAME_MIN_SIZE) {
-		return "Usernames may be between 3 and 30 characters and must be alphanumeric.";
+		return "Username must be between " . $USERNAME_MIN_SIZE . " and " . $USERNAME_MAX_SIZE . " characters.";
+	}
+	
+	//Check username is unique
+	if(checkUserExist($user)) {
+		return "Username " . $user . " already exists.";
 	}
 
 	//Check password rules
 	if(!ctype_alnum($password) || strlen($password) > $PASSWORD_MAX_SIZE || strlen($password) < $PASSWORD_MIN_SIZE) {
-		return "Passwords may be between 3 and 30 characters and must be alphanumeric.";
+		return "Password must be between " . $PASSWORD_MIN_SIZE . " and " . $PASSWORD_MAX_SIZE . " characters.";
+	}
+	
+	//Only do checks on entered emails
+	if(email != "") {
+		//Check email rules
+		if(strlen($email) > $EMAIL_MAX_SIZE || strlen($email) < $EMAIL_MIN_SIZE) {
+			return "Email must be between " . $EMAIL_MIN_SIZE . " and " . $EMAIL_MAX_SIZE . " characters.";
+		}
+		
+		//Check email is unique
+		if(checkEmailExist($email)) {
+			return "Email " . $email . " is already in use.";
+		}
 	}
 
 	//Make username safe for db and hash the password
 	$fixedUser = mysql_real_escape_string($user);
 	$hashedPassword = crypt($password, $user);
-
+	$fixedEmail = mysql_real_escape_string($email);
+	
 	//Run the query on the database
-	$sql = "insert into " . $USER_TABLE . " (username,password) values ('$fixedUser','$hashedPassword')";
+	$sql = "insert into " . $USER_TABLE . " (username,password,email) values ('$fixedUser','$hashedPassword','$fixedEmail')";
 	mysql_query($sql);
 	if(mysql_error()) {
-		return "Error adding user to table. Please contact the site administrator.";
+		return false;
 	} else {
-		return 1;
+		return true;
 	}
 }
 ?>
