@@ -48,7 +48,7 @@ if(isset($_SESSION['user_pk'])) {
 }
 ?>
 
-<link href='styles/signin.css' rel='stylesheet'>
+<link href='styles/register.css' rel='stylesheet'>
 
 <div class='container'>
     <form class='form-signin' action='register.php' method='post'>
