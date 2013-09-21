@@ -1,11 +1,11 @@
 <?php
 /***** Configuration ****************/
-$USER = 'amwebapp_admin';
-$PASSWORD = 'et2012am';
+$USER = 'root';
+$PASSWORD = 'MHacks';
 $DB='Mhacks';
 
 $USER_TABLE = 'Users';
-$USERNAME_MAX_SIZE = 30;
+$USERNAME_MAX_SIZE = 25;
 $USERNAME_MIN_SIZE = 3;
 $PASSWORD_MAX_SIZE = 30;
 $PASSWORD_MIN_SIZE = 3;
