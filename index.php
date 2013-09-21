@@ -43,7 +43,11 @@ include "header.php";
     </div>
 </div>
 
-<div class='container' id='vis'><h1>Visualization will go here! Please work!</h1></div>
+<div class='container wrapper'>
+	<div id='vis'>
+		<h1>Visualization will go here! Please work!</h1>
+	</div>
+</div>
 
 <?php
 include "footer.php";
