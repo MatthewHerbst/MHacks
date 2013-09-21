@@ -10,6 +10,7 @@ if(isset($_SESSION['user_pk'])) {
 } else { //They need to register
 	if(isset($_REQUEST['cmd'])) { //See if the user is requesting anything		
 		if($$_REQUEST['cmd'] == "register") { //See if they are asking to register
+			echo "<script type='text/javascript'>alert('Register received');</script>";
 			//Get the entered username, email, and password
 			$u = $_REQUEST['username'];
 			$e = $_REQUEST['email'];
@@ -21,7 +22,7 @@ if(isset($_SESSION['user_pk'])) {
 			} else if(empty($e)) {
 				$errorMsg = "Please enter an email address";
 			} else if(empty($p)) {
-				$errorMsg = "Please enter a password";
+				$errorMsg = "Please enter a password"; 
 			} else {
 				if(checkUserExist($u)) { //See if that username is already taken
 					$errorMsg = "Username " . $u . " already exists.";
