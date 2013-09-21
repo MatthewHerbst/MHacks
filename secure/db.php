@@ -1,7 +1,7 @@
 <?php
 /***** Configuration ****************/
-$USER = 'amwebapp_admin';
-$PASSWORD = 'et2012am';
+$USER = 'root';
+$PASSWORD = 'MHacks';
 $DB='Mhacks';
 
 $USER_TABLE = 'Users';
