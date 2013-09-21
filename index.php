@@ -6,7 +6,7 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 		if($_POST['cmd'] == "logout") { //Check if the user wants to logout
 			unset($_SESSION['user_pk']);
 			
-			echo "<script type=text/javascript>alert('logout - cmd: " . $_REQUEST['cmd'] . "');</script>";
+			echo "<script type=text/javascript>alert('logout - cmd: " . $_POST['cmd'] . "');</script>";
 			
 			//Forward them back to the homepage
 			header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
@@ -14,7 +14,7 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 	}
 } else { //They need to sign in (registration occurs on register.php
 	if(isset($_POST['cmd'])) { //See if the user is requesting anything
-		if($_POST['cmd'] == "login") { //Check if the user wants to login
+		if($_POST['cmd'] == "login" && isset($_POST['username']) && isset($_POST['password'])) { //Check if the user wants to login
 			//Get the entered username and password
 			$u = $_POST['username'];
 			$p = $_POST['password'];
@@ -32,7 +32,7 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 					$_SESSION['user'] = $u;
 					$_SESSION['user_pk'] = $pk;
 					
-					echo "<script type=text/javascript>alert('Login ok!');</script>";
+					echo "<script type='text/javascript'>alert('Login ok!');</script>";
 				} else {
 					$errorMsg = "Invalid Username/Password";
 				}
