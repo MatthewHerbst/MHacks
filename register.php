@@ -2,6 +2,8 @@
 include "header.php";
 include "navbar.php";
 
+echo "<script type='text/javascript'>alert('" . var_dump($_REQUEST) . "');</script>";
+
 //See if this person has an open session
 if(isset($_SESSION['user_pk'])) {
 	//They have either just registered, or are trying to access this page while logged in
@@ -10,7 +12,7 @@ if(isset($_SESSION['user_pk'])) {
 } else { //They need to register
 	if(isset($_REQUEST['cmd'])) { //See if the user is requesting anything		
 		if($$_REQUEST['cmd'] == "register") { //See if they are asking to register
-			echo "<script type='text/javascript'>alert('Register received');</script>";
+			
 			//Get the entered username, email, and password
 			$u = $_REQUEST['username'];
 			$e = $_REQUEST['email'];
