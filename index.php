@@ -2,8 +2,8 @@
 include "header.php";
 
 if(isset($_SESSION['user_pk'])) { //See if this person has an open session
-	if(isset($_REQUEST['cmd'])) { //See if the user is requesting anything
-		if($_REQUEST['cmd'] == "logout") { //Check if the user wants to logout
+	if(isset($_POST['cmd'])) { //See if the user is requesting anything
+		if($_POST['cmd'] == "logout") { //Check if the user wants to logout
 			unset($_SESSION['user_pk']);
 			
 			echo "<script type=text/javascript>alert('logout - cmd: " . $_REQUEST['cmd'] . "');</script>";
@@ -13,11 +13,11 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 		}
 	}
 } else { //They need to sign in (registration occurs on register.php
-	if(isset($_REQUEST['cmd'])) { //See if the user is requesting anything
-		if($_REQUEST['cmd'] == "login") { //Check if the user wants to login
+	if(isset($_POST['cmd'])) { //See if the user is requesting anything
+		if($_POST['cmd'] == "login") { //Check if the user wants to login
 			//Get the entered username and password
-			$u = $_REQUEST['username'];
-			$p = $_REQUEST['password'];
+			$u = $_POST['username'];
+			$p = $_POST['password'];
 		
 			//Ensure both a username and a password were entered
 			if(empty($u)) {
