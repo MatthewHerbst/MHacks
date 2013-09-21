@@ -134,7 +134,7 @@ function addUser($user, $password, $email = "") {
 	}
 	
 	//Only do checks on entered emails
-	if(email != "") {
+	if($email != "") {
 		//Check email rules
 		if(strlen($email) > $EMAIL_MAX_SIZE || strlen($email) < $EMAIL_MIN_SIZE) {
 			return "Email must be between " . $EMAIL_MIN_SIZE . " and " . $EMAIL_MAX_SIZE . " characters.";
