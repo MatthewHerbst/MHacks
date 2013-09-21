@@ -36,7 +36,7 @@ echo "<link rel='stylesheet' type='text/css' href='styles/styles.css'>
 		<link rel='stylesheet' type='text/css' href='styles/bootstrap/css/bootstrap.css'>
 		<script type='text/javascript' src='styles/bootstrap/js/bootstrap.min.js'></script>
 		<script type='text/javascript' src='js/d3/d3.v3.js'></script>
-		<script type='text/javascript' src='js/jquery-1.10.2.min.js'></script>
+		<script type='text/javascript' src='js/jquery/jquery-1.10.2.min.js'></script>
 		<script src='http://d3js.org/queue.v1.min.js'></script>
 		<script src='http://d3js.org/topojson.v1.min.js'></script>";
 		

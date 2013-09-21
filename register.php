@@ -62,7 +62,7 @@ echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</scri
 <div class='container'>
     <form class='form-signin' action='register.php' method='post'>
 		<h2 class='form-signin-heading'>Please register</h2>
-        <input type='text' class='form-control' placeholder='Username' autofocus name='password' maxlength='25'>
+        <input type='text' class='form-control' placeholder='Username' autofocus name='username' maxlength='25'>
 		<input type='text' class='form-control' placeholder='Email address' name='email' maxlength='255'>
         <input type='password' class='form-control' placeholder='Password' name='password' maxlength='20'>
 		<input type='hidden' name='cmd' value='register' />
