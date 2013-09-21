@@ -3,7 +3,7 @@ include "header.php";
 
 //See if this person has an open session
 if(isset($_SESSION['user_pk'])) {
-	echo "<script type=;text/javascript>alert('Logged in. user_pk: '" . $_SESSION['user_pk'] . "');</script>";
+	echo "<script type=text/javascript>alert('Logged in. user_pk: '" . $_SESSION['user_pk'] . "');</script>";
 	//Check if the user wants to logout
 	if(isset($_REQUEST['cmd'])) {
 		if($_REQUEST['cmd'] == "logout") {
@@ -14,7 +14,7 @@ if(isset($_SESSION['user_pk'])) {
 		}
 	}
 } else { //They need to sign in or register
-	echo "<script type=;text/javascript>alert('Not logged in');</script>";
+	echo "<script type=text/javascript>alert('Not logged in');</script>";
 	//See if the user is requesting anything
 	if(isset($_REQUEST['cmd'])) {
 		$request = $_REQUEST['cmd'];
