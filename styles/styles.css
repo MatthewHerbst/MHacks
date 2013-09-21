@@ -9,3 +9,10 @@
 	height: 100%;
 	width: 100%;
 }
+
+/* Vis */
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}

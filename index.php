@@ -49,6 +49,8 @@ include "header.php";
 	</div>
 </div>
 
+<script type='text/javascript' src='d/thresholdchoropleth.js'></script>
+
 <?php
 include "footer.php";
 ?>
