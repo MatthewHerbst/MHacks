@@ -13,6 +13,7 @@ echo "<meta name='author' content='Matthew Herbst'>
 
 //Global imports
 echo "<link rel='stylesheet' type='text/css' href='styles/styles.css'>
+		<link rel='stylesheet' type='text/css' href='styles/bootstrap/css/bootstrap.css'>
 		<script type='text/javascript' src='js/d3/d3.v3.js'></script>
 		<script type='text/javascript' src='js/jquery-1.10.2.min.js'></script>";
 		
