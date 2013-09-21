@@ -9,6 +9,8 @@ if(isset($_SESSION['user_pk'])) {
 		if($_REQUEST['cmd'] == "logout") {
 			unset($_SESSION['user_pk']);
 			
+			echo "<script type=text/javascript>alert('logout - cmd: " . $_REQUEST['cmd'] . "');</script>";
+			
 			//Forward them back to the homepage
 			header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
 		}
@@ -17,7 +19,7 @@ if(isset($_SESSION['user_pk'])) {
 	//See if the user is requesting anything
 	if(isset($_REQUEST['cmd'])) {
 		$request = $_REQUEST['cmd'];
-		echo "<script type=text/javascript>alert('cmd: " . $_REQUEST['cmd'] . "');</script>";
+		echo "<script type=text/javascript>alert('login/register - cmd: " . $_REQUEST['cmd'] . "');</script>";
 		//Get the entered username and password
 		$u = $_REQUEST['username'];
 		$p = $_REQUEST['password'];
