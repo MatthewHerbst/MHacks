@@ -41,7 +41,7 @@ function validateUser($user, $password) {
 	}
 
 	//Run the query on the database
-	$query = "select id, password from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
+	$query = "select _id, password from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
 	$q = mysql_query($query);
 	if(!$q) {
 		return -1;
@@ -49,8 +49,8 @@ function validateUser($user, $password) {
 	$r = mysql_fetch_array($q);
 	if($r && $r['password'] != crypt($password, $user)) {
 	    return -1;
-	} else if ($r && $r['id'] > 0) {
-		return $r['id'];
+	} else if ($r && $r['_id'] > 0) {
+		return $r['_id'];
 	} else {
 		return -1;
 	}
@@ -63,7 +63,7 @@ function checkUserExist($user) {
 	global $USER_TABLE;
 
 	//Run the query on the database
-	$sql = "select id from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
+	$sql = "select _id from ". $USER_TABLE . " where username = '" . mysql_real_escape_string($user) . "'";
 	$q = mysql_query($sql);
 
 	//Check if there was an error running the query
@@ -78,7 +78,7 @@ function checkUserExist($user) {
 
 	//Check query results
 	$r = mysql_fetch_array($q);
-	return ($r && $r['id'] > 0);
+	return ($r && $r['_id'] > 0);
 }
 
 /*
@@ -88,7 +88,7 @@ function checkEmailExist($email) {
 	global $USER_TABLE;
 
 	//Run the query on the database
-	$sql = "select id from ". $USER_TABLE . " where email = '" . mysql_real_escape_string($email) . "'";
+	$sql = "select _id from ". $USER_TABLE . " where email = '" . mysql_real_escape_string($email) . "'";
 	$q = mysql_query($sql);
 
 	//Check if there was an error running the query
@@ -103,7 +103,7 @@ function checkEmailExist($email) {
 
 	//Check query results
 	$r = mysql_fetch_array($q);
-	return ($r && $r['id'] > 0);
+	return ($r && $r['_id'] > 0);
 }
 
 /*
