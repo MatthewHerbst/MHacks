@@ -63,8 +63,8 @@ echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</scri
         <input type='text' class='form-control' placeholder='Username' autofocus name='password' maxlength='25'>
 		<input type='text' class='form-control' placeholder='Email address' name='email' maxlength='255'>
         <input type='password' class='form-control' placeholder='Password' name='password' maxlength='20'>
-        <button class='btn btn-lg btn-primary btn-block' type='submit'>Register</button>
 		<input type='hidden' name='cmd' value='register' />
+		<button class='btn btn-lg btn-primary btn-block' type='submit'>Register</button>
     </form>
 </div> <!-- /container -->
 
