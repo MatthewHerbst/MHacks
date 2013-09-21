@@ -5,8 +5,8 @@ include "header.php";
 if(isset($_SESSION['user_pk'])) {
 	echo "<script type=text/javascript>alert('Logged in. user_pk: '" . $_SESSION['user_pk'] . "');</script>";
 	//Check if the user wants to logout
-	if(isset($_REQUEST['cmd'])) {
-		if($_REQUEST['cmd'] == "logout") {
+	if(isset($_REQUEST['cmd'])) {) 
+		if($_REQUEST['cmd'] == "logout"{
 			unset($_SESSION['user_pk']);
 			
 			//Forward them back to the homepage
@@ -17,7 +17,7 @@ if(isset($_SESSION['user_pk'])) {
 	//See if the user is requesting anything
 	if(isset($_REQUEST['cmd'])) {
 		$request = $_REQUEST['cmd'];
-
+		echo "<script type=text/javascript>alert('cmd: " . $_REQUEST['cmd'] . "');</script>";
 		//Get the entered username and password
 		$u = $_REQUEST['username'];
 		$p = $_REQUEST['password'];
