@@ -2,21 +2,19 @@
 include "header.php";
 include "navbar.php";
 
-echo "<script type='text/javascript'>alert('" . var_dump($_REQUEST) . "');</script>";
-
 //See if this person has an open session
 if(isset($_SESSION['user_pk'])) {
 	//They have either just registered, or are trying to access this page while logged in
 	//Forward them back to the homepage
 	header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
 } else { //They need to register
-	if(isset($_REQUEST['cmd'])) { //See if the user is requesting anything		
-		if($_REQUEST['cmd'] == "register") { //See if they are asking to register
+	if(isset($_POST['cmd'])) { //See if the user is requesting anything		
+		if($_POST['cmd'] == "register") { //See if they are asking to register
 			
 			//Get the entered username, email, and password
-			$u = $_REQUEST['username'];
-			$e = $_REQUEST['email'];
-			$p = $_REQUEST['password'];
+			$u = $_POST['username'];
+			$e = $_POST['email'];
+			$p = $_POST['password'];
 			
 			//Ensure all values entered
 			if(empty($u)) {
@@ -38,6 +36,8 @@ if(isset($_SESSION['user_pk'])) {
 						if($pk != -1) { //Check to see if the login was a success
 							$_SESSION['user_pk'] = $pk;
 							$_SESSION['user'] = $u;
+							
+							echo "<script type='text/javascript'>alert('forwarding to home!');</script>";
 							
 							//Send to the home page after logging in
 							header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
