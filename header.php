@@ -13,9 +13,8 @@ $errorMsg = "";
 $request = "";
 
 //If the user is not logged in (and they are not trying to register) send them to the homepage
-if(!isset($_SESSION['user_pk']) && basename($_SERVER['PHP_SELF']) != "register.php" && $_SESSION['cmd'] != "register") {
-	//Only do the send if we aren't already on the home page!
-	if(basename($_SERVER['PHP_SELF']) != "index.php") {
+if(!isset($_SESSION['user_pk']) && (basename($_SERVER['PHP_SELF']) != "register.php")) {
+	if(basename($_SERVER['PHP_SELF']) != "index.php") { //Only do the send if we aren't already on the home page!
 		header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
 	}
 }

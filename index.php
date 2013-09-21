@@ -39,10 +39,10 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 			}
 		}
 	}
-	
-	//Give the error message over to the JavaScript to deal with displaying it
-	echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</script>";
 }
+
+//Give the error message over to the JavaScript to deal with displaying it
+echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</script>";
 
 include "navbar.php";
 ?>
