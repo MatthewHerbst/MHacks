@@ -1,0 +1,197 @@
+<?php
+	# Manually begin session if not defined in php.ini
+	if (!isset($_SESSION)) {
+		session_start();
+	}
+	require_once('include/site_constants.inc.php');
+	if (isset($_SESSION['User_Permission']) 
+		&& $_SESSION['User_Permission'] == PERMISSION_ADMIN) {
+		$admin = true;
+	} else {
+		$admin = false;
+	}
+	
+	ob_start();
+?>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta encoding="utf-8"/>
+		<title><?php if (isset($page_title)) echo $page_title; ?></title>
+		<link rel="stylesheet" type="text/css" href="style/css_reset.css"/>
+		<link rel="stylesheet" type="text/css" href="style/static_styles.css"/>
+		
+		<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>	
+		<script src="http://platform.twitter.com/widgets.js" id="twitter-wjs"></script>
+		<script type="text/javascript" src="JavaScript/jquery.js"></script>
+		<script type="text/javascript" src="JavaScript/ImageSwapping.js"></script>
+		<script type="text/javascript" src="JavaScript/dropdowntabs.js"></script>
+		<!--
+		<script type="text/javascript" src="1.7.2/javascripts/top_up-min.js"></script>
+		
+		<script type="text/javascript">
+			TopUp.host = "http://www.am.etwebapp.com/";
+			TopUp.images_path = "1.7.2/images/top_up/";
+		</script>
+		-->
+		
+		<script type="text/javascript">
+		
+			function onPageLoad() {
+				MM_preloadImages(
+						'Graphics/NavBar/calculator_select.png',
+						'Graphics/NavBar/profile_select.png',
+						'Graphics/NavBar/search_select.png',
+						'Graphics/NavBar/about_select.png');
+								
+				tabdropdown.init("NavBar", 0)
+				
+				<?php if (!empty($on_page_load)) echo $on_page_load . ';' ?>
+				
+			}
+			
+			$(document).ready(function() {
+				// Remove #SideNav if the user has js enabled
+				var contentWrapper = document.getElementById('ContentWrapper');
+				var sideNav = document.getElementById('SideNav');
+				contentWrapper.removeChild(sideNav);
+				contentWrapper.style.paddingLeft = '0px';
+				
+				resizeContentDiv();
+				
+				$(window).resize(resizeContentDiv);
+				
+				<?php if (!empty($on_page_ready)) echo $on_page_ready . ';' ?>
+			});
+
+			function resizeContentDiv() {
+				var height = $('#ContentWrapper').height() + ($('html').height() - $('body').outerHeight());
+				$('#Content').css('min-height', height.toString() + 'px');
+			}
+		</script>
+		
+		<?php
+			if (isset($header_elements)) {
+				foreach ($header_elements as $element) {
+					echo $element;
+				}
+			}
+			
+			require_once($_SERVER['DOCUMENT_ROOT'] . "/../Secure/error_reporting.inc.php");
+			require_once($_SERVER['DOCUMENT_ROOT'] . "/../Secure/db_connect.inc.php");
+		?>
+	</head>
+
+	<body onload="onPageLoad()">
+		
+		<div id="MastHead">
+			<a href="index.php"><img id="TitleImage" src="Graphics/logo.png" alt="Foresight"/></a>
+			
+			<div class="Login">
+				<?php 
+					if (isset($_SESSION['User_Id'])) {
+						echo "<table><tr><td>{$_SESSION['User_Name']} &nbsp;</td><td><a href=\"logout.php\">Logout</a></td></tr></table>";
+					} else {
+						echo "<form method=\"post\" action=\"login_validation.php\" method=\"post\">
+					<!-- Where to redirect to from the login validation page -->
+					<input type=\"hidden\" name=\"redirect\" value=\"{$_SERVER['SERVER_NAME']}{$_SERVER['PHP_SELF']}\"/>
+					
+					<table>
+						<tr>
+							<td>
+								<input type=\"text\" name=\"username\" size=\"25\" maxlength=\"25\" placeholder=\"Username\"/>&nbsp;
+							</td>
+							<td>
+								<input type=\"password\" name=\"password\" size=\"25\" maxlength=\"25\" placeholder=\"Password\"/>&nbsp;
+							</td>
+							<td>
+								<input type=\"submit\" value=\"Login\"/>&nbsp;
+							</td>
+							<td>
+								<a href=\"user_registration_form.php\">Register</a>
+							</td>
+						</tr>
+					</table>
+				</form>";
+					}
+				?>
+				
+			</div>
+			
+			<div id="NavBar" class="bluetabs">
+					<ul>
+					<span>
+						
+						
+						<li onmouseout="MM_swapImgRestore()" onmouseover=
+						"MM_swapImage('Calculator','','Graphics/NavBar/calculator_select.png',1)">
+							<a href="calculator.php" rel="CalculatorDropMenu"><img src="Graphics/NavBar/calculator_reg.png"
+							alt="Calculator"  id="Calculator" name="Calculator"></a>
+						</li>
+						
+						<li onmouseout="MM_swapImgRestore()" onmouseover=
+						"MM_swapImage('Profile','','Graphics/NavBar/profile_select.png',1)">
+							<a href="profile.php" rel="ProfileDropMenu"><img src="Graphics/NavBar/profile_reg.png"
+							alt="Profile"  id="Profile" name="Profile"></a>
+						</li>
+						
+						<li onmouseout="MM_swapImgRestore()" onmouseover=
+						"MM_swapImage('Search','','Graphics/NavBar/search_select.png',1)">
+							<a href="browse_colleges.php" rel="SearchDropMenu"><img src="Graphics/NavBar/search_reg.png"
+							alt="Search"  id="Search" name="Search"></a>
+						</li>	
+						
+						<li onmouseout="MM_swapImgRestore()" onmouseover=
+						"MM_swapImage('About','','Graphics/NavBar/about_select.png',1)">
+							<a href="about.php"><img src="Graphics/NavBar/about_reg.png"
+							alt="About"  id="About" name="About"></a>
+						</li>
+						
+						<?php if ($admin == true) { ?>
+						<li onmouseout="MM_swapImgRestore()" onmouseover=
+						"MM_swapImage('Admin','','Graphics/NavBar/admin_select.png',1)">
+							<a href="admin.php" rel="AdminDropMenu"><img src="Graphics/NavBar/admin_reg.png"
+							alt="Admin"  id="Admin" name="Admin"></a>
+						</li>
+						<?php } ?>
+						
+					</span>
+					</ul>
+			</div>
+			<div id="ProfileDropMenu" class="DropMenuDiv">
+				<a href="profile.php">My Profile</a>
+				<a href="user_colleges.php">My Colleges</a>
+			</div>
+			<div id="CalculatorDropMenu" class="DropMenuDiv">
+				<a href="calculator.php">Calculator</a>
+			</div>
+			<div id="SearchDropMenu" class="DropMenuDiv">
+				<a href="browse_colleges.php">Browse Colleges</a>
+			</div>	
+			<div id="AdminDropMenu" class="DropMenuDiv">
+				<a href="mysql_interface.php">MYSQL Interface</a>
+			</div>	
+			
+		</div> <!-- End Masthead Div -->
+		
+		<div id="ContentWrapper">
+		
+		<div id="SideNav">
+			<p>Nav Bar</p><br>
+			
+			<a href="index.php"><p>Home</p> </a><br>
+			
+			<a href="calculator.php"><p>Calculator</p> </a><br>
+			
+			<a href="profile.php"><p>Profile</p> </a><br>
+			
+			<a href="browse_colleges.php"><p>Search</p> </a><br>
+
+			<a href="about.php"><p>About</p> </a><br>
+			
+
+		</div>
+		
+		<div id="Content">
+		
