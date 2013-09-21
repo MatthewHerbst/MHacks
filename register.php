@@ -11,7 +11,7 @@ if(isset($_SESSION['user_pk'])) {
 	header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
 } else { //They need to register
 	if(isset($_REQUEST['cmd'])) { //See if the user is requesting anything		
-		if($$_REQUEST['cmd'] == "register") { //See if they are asking to register
+		if($_REQUEST['cmd'] == "register") { //See if they are asking to register
 			
 			//Get the entered username, email, and password
 			$u = $_REQUEST['username'];
