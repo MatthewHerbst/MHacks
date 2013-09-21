@@ -6,5 +6,4 @@
 //Basic footer tags
 echo "</body></html>";
 
-
 ?>
