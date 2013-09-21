@@ -116,23 +116,24 @@ if(isset($_SESSION['user_pk'])) {
 				</div>
 				<script type='txt/javascript'>
 					function clickLogin() {
-						document.getElementById('loginRegister').innerHTML = '<input type=\'hidden\' name\'cmd\' value=\'login\' />';
+						document.getElementById('loginRegisterLogout').innerHTML = '<input type=\'hidden\' name\'cmd\' value=\'login\' />';
 					};
 					function clickRegister() {
-						document.getElementById('loginRegister').innerHTML = '<input type=\'hidden\' name=\'cmd\' value=\'register\' />';
+						document.getElementById('loginRegisterLogout').innerHTML = '<input type=\'hidden\' name=\'cmd\' value=\'register\' />';
+					};
+					function clickLogout() {
+						document.getElementById('loginRegisterLogout').innerHTML = '<input type=\'hidden\' name=\'cmd\' value=\'logout\' />';
 					};
 				</script>
 				<?php //Show login and register or logout buttons
 				if(isset($_SESSION['user_pk'])) {
-					echo "<button type='submit' class='btn btn-success'>Logout</button>";
+					echo "<button type='submit' class='btn btn-success' onclick='clickLogout'>Logout</button>";
 				} else {
 					echo "<button type='submit' class='btn btn-success' onclick='clickLogin()'>Sign in</button>
 					<button type='submit' class='btn btn-success' onclick='clickRegister()'>Register</button>";
 				}
 				?>
-				<div id='loginRegister'>
-					<input type='hidden' id='loginRegister' name='cmd' value='logout'>
-				</div>
+				<div id='loginRegister'></div>
 			</form>
         </div><!--/.navbar-collapse -->
     </div><!--/.container -->
