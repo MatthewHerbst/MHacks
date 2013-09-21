@@ -14,7 +14,6 @@ if(isset($_SESSION['user_pk'])) {
 		}
 	}
 } else { //They need to sign in or register
-	echo "<script type=text/javascript>alert('Not logged in');</script>";
 	//See if the user is requesting anything
 	if(isset($_REQUEST['cmd'])) {
 		$request = $_REQUEST['cmd'];
@@ -37,9 +36,8 @@ if(isset($_SESSION['user_pk'])) {
 					//User exists, initialize session variables
 					$_SESSION['user'] = $u;
 					$_SESSION['user_pk'] = $pk;
-
-					//Send the user to the selection page
-					header("Location: http://174.34.170.64/selection.php");
+					
+					echo "<script type=text/javascript>alert('Login ok!');</script>";
 				} else {
 					$errorMsg = "Invalid Username/Password";
 				}
@@ -56,18 +54,15 @@ if(isset($_SESSION['user_pk'])) {
 					$errorMsg = "Username " . $u . " already exists.";
 				} else {
 					$added = addUser($u, $p); //Returns 1 if succesful or an error message otherwise
-					if($added == 1) {
+					if($added) {
 						$pk = validateUser($u, $p);
 
 						//Check if the validation returned valid
 						if($pk != -1) {
 							$_SESSION['user_pk'] = $pk;
 							$_SESSION['user'] = $u;
-
-							//Send the user to the selection page
-							header("Location: http://174.34.170.64/selection.php");
 						} else {
-							$errorMsg = "Usernames and passwords must be alphanumeric";
+							$errorMsg = "Failed to login.";
 						}
 					} else {
 						$errorMsg = $added;
