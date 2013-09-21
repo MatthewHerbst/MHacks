@@ -6,7 +6,7 @@ if(isset($_SESSION['user_pk'])) {
 	echo "<script type=text/javascript>alert('Logged in. user_pk: '" . $_SESSION['user_pk'] . "');</script>";
 	//Check if the user wants to logout
 	if(isset($_REQUEST['cmd'])) { 
-		if($_REQUEST['cmd'] == "logout")
+		if($_REQUEST['cmd'] == "logout") {
 			unset($_SESSION['user_pk']);
 			
 			//Forward them back to the homepage
