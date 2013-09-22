@@ -47,6 +47,8 @@ include "navbar.php";
 		<div id='productList'>
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
+				echo "<h3>My Products</h3>";
+			
 				$products = getUserProducts($_SESSION['user_pk']);
 				
 				if($products == false) {
@@ -64,8 +66,40 @@ include "navbar.php";
 			?>
 		</div><!--/#productList -->
 		<div id='productSearch'>
-			<div id='search'></div>
-			<div id='searchResults'></div>
+			<div id='search'>
+				<form action='index.php' method='post'>
+					<div class='form-group'>
+						<input type='text' placeholder='Search' name='query' class='form-control'>
+					</div>
+					<button type='submit' class='btn btn-success'>Search</button>
+					<input type='hidden' name='cmd' value='search' />
+				</form>
+			</div>
+			<div id='searchResults'>
+			<?php //Populate the list of products that match the search term
+			if(isset($_SESSION['user_pk'])) {
+				if(isset($_POST['cmd']) && $_POST['cmd'] == "search") {
+					echo "<h3>Search Results</h3>";
+				
+					$products = searchProducts($_POST['query']);
+					
+					if($products == false) {
+						echo "Error reading search list";
+					} else if($products == -1){
+						echo "No products matched your search :(";
+					} else {
+						foreach($products as $product) {
+							echo "<div class='product'>" . $product . "</div>";
+						}
+					}
+				} else {
+					echo "Search for a product!";
+				}
+			} else {
+				echo "Login to search for products!";
+			}
+			?>
+			</div>
 		</div>
 	</div><!--/#sidebar -->
 </div><!--/.container wrapper -->
