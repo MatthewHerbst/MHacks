@@ -50,13 +50,17 @@ include "navbar.php";
 				$products = getUserProducts($_SESSION['user_pk']);
 				
 				foreach($products as $product) {
-					echo "<div id='product'>" . $product . "</div>";
+					echo "<div class='product'>" . $product . "</div>";
 				}
 			} else {
 				echo "Login to view saved products!";
 			}
 			?>
 		</div><!--/#productList -->
+		<div id='productSearch'>
+			<div id='search'></div>
+			<div id='searchResults'></div>
+		</div>
 	</div><!--/#sidebar -->
 </div><!--/.container wrapper -->
 

@@ -7,7 +7,15 @@
 	border: 2px solid #000;
 	text-align: center;
 	height: 100%;
-	width: 100%;
+	width: 85%;
+}
+
+#sidebar {
+	padding-top: 50px;
+	border-bottom: 2px solid #000;
+	text-align: center;
+	height: 100%;
+	width: 15%;
 }
 
 /* Vis */
