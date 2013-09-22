@@ -48,9 +48,12 @@ include "navbar.php";
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
 				$products = getUserProducts($_SESSION['user_pk']);
-				
-				foreach($products as $product) {
-					echo "<div class='product'>" . $product . "</div>";
+				if(!$products) {
+					echo "Error reading product list";
+				} else {
+					foreach($products as $product) {
+						echo "<div class='product'>" . $product . "</div>";
+					}
 				}
 			} else {
 				echo "Login to view saved products!";

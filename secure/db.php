@@ -170,8 +170,8 @@ function getUserProducts($user) {
 	global $USER_PRODUCT_TABLE;
 	
 	$sql = "SELECT name FROM 
-				((SELECT product_id FROM Model WHERE user_id = '" . $user . "') AS T
-				LEFT INNER JOIN Products
+				((SELECT product_id FROM Model WHERE user_id = " . $user . ") AS T
+				INNER JOIN Products
 				ON T.product_id = Products._id)";
 	$q = mysql_query($sql);
 	
