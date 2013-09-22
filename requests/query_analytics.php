@@ -2,8 +2,8 @@
 
 $suppress_error_redirect = true;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/error_reporting.inc.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/db.php');
+include('../secure/error_reporting.inc.php');
+include('../secure/db.php');
 
 if (!isset($_GET['product_id'])) {
 	exit();
@@ -43,9 +43,9 @@ if (!$result) {
 } else {
 	echo "\"points\": [\n";
 	
-	if (mysql_num_rows($result) > 0) {
+	if (($count = mysql_num_rows($result)) > 0) {
 		while ($point = mysql_fetch_array($result, MYSQL_NUM)) {
-			echo "{ ";
+			echo "{ "
 			echo "\"value\": ";
 			echo $point[0];
 			echo "; ";
