@@ -2,13 +2,20 @@
 
 $suppress_error_redirect = true;
 
-require_once('/../secure/db.php');
+echo 'yo1';
+require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/error_reporting.inc.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/db.php');
+
+echo 'yo2';
 
 if (!isset($_GET['product_id'])) {
+	echo 'yo3';
 	exit();
 }
 
-header('Content-type: application/json');
+echo 'yo4';
+
+//header('Content-type: application/json');
 
 $product_id = $_GET['product_id'];
 
