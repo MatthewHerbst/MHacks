@@ -1,18 +1,18 @@
 <?php
 include "header.php";
 
+echo "<script type='text/javascript'>alert('" . var_dump($_POST) . "');</script>";
+
 if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 	if(isset($_POST['cmd'])) { //See if the user is requesting anything
 		if($_POST['cmd'] == "logout") { //Check if the user wants to logout
 			unset($_SESSION['user_pk']);
 			
-			echo "<script type='text/javascript'>alert('logout - cmd: " . $_POST['cmd'] . "');</script>";
-			
 			//Forward them back to the homepage
 			header("Location: http://ec2-54-200-75-240.us-west-2.compute.amazonaws.com/MHacks/index.php");
 		}
 	}
-} else { //They need to sign in (registration occurs on register.php
+} else { //They need to sign in (registration occurs on register.php)
 	if(isset($_POST['cmd'])) { //See if the user is requesting anything
 		if($_POST['cmd'] == "login" && isset($_POST['username']) && isset($_POST['password'])) { //Check if the user wants to login
 			//Get the entered username and password
@@ -25,10 +25,8 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 			} else if(empty($p)) {
 				$errorMsg = "Please enter a password";
 			} else { //Check the entered username and password
-				//Get the user's primary key (if they exist)
-				$pk = validateUser($u, $p);
-				if($pk != -1) {
-					//User exists, initialize session variables
+				$pk = validateUser($u, $p); //Login the user
+				if($pk != -1) { //Check if that login was a success
 					$_SESSION['user'] = $u;
 					$_SESSION['user_pk'] = $pk;
 					
