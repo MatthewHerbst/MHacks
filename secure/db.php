@@ -193,4 +193,32 @@ function getUserProducts($user) {
 	
 	return $products;
 }
+
+/*
+Return a list of product search results
+*/
+function searchProducts($searchTerm) {
+	global $USER_PRODUCT_TABLE;
+	
+	$sql = "SELECT name FROM Products WHERE name LIKE %" . $searchTerm . "%";
+	$r = mysql_query($sql);
+	
+	//Check if there was an error running the query
+	if(!$r) {
+		return false;
+	}
+
+	//Check if the query has no results
+	if(mysql_num_rows($r) == 0) {
+		return -1;
+	}
+	
+	$products = array();
+	
+	while($row = mysql_fetch_array($r, MYSQL_NUM)) {
+		$products[] = $row[0];
+	}
+	
+	return $products;
+}
 ?>

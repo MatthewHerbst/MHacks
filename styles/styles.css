@@ -33,6 +33,7 @@
 	text-align: center;
 	height: 50%;
 	width: 100%;
+	overflow-y: auto;
 }
 
 #productSearch {
@@ -41,6 +42,10 @@
 	text-align: center;
 	height: 50%;
 	width: 100%;
+}
+
+#searchResults {
+	overflow-y: auto;
 }
 
 /* Vis */
