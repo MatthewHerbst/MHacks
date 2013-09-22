@@ -187,9 +187,8 @@ function getUserProducts($user) {
 	
 	$products = array();
 	
-	var_dump($q);
-	
 	while($product = mysql_fetch_row($q)) {
+		var_dump($product);
 		$products.array_push($product[0]);
 	}
 	
