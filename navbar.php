@@ -51,7 +51,7 @@
 					
 						<button type='submit' class='btn btn-success'>Sign in</button>
 					
-						<input type='hidden' name='cmd' value='register' />
+						<input type='hidden' name='cmd' value='login' />
 					</form>
 					<form class='navbar-form navbar-right' action='register.php' method='post'>
 						<button type='submit' class='btn btn-success'>Register</button>
