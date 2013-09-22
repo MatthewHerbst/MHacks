@@ -171,7 +171,7 @@ function getUserProducts($user) {
 	
 	$sql = "SELECT name FROM 
 				((SELECT product_id FROM Model WHERE user_id = '" . $user . "') AS T
-				LEFT OUTER JOIN Products
+				LEFT INNER JOIN Products
 				ON T.product_id = Products._id)";
 	$q = mysql_query($sql);
 	
@@ -188,7 +188,6 @@ function getUserProducts($user) {
 	$products = array();
 	
 	while($product = mysql_fetch_row($q)) {
-		var_dump($product);
 		$products.array_push($product[0]);
 	}
 	
