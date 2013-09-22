@@ -50,6 +50,8 @@ include "navbar.php";
 				$products = getUserProducts($_SESSION['user_pk']);
 				if(!$products) {
 					echo "Error reading product list";
+				} else if($products == -1){
+					echo "You have no saved products";
 				} else {
 					foreach($products as $product) {
 						echo "<div class='product'>" . $product . "</div>";

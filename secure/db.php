@@ -180,9 +180,9 @@ function getUserProducts($user) {
 		return false;
 	}
 
-	//Check if the query has results
+	//Check if the query has no results
 	if(!$q) {
-		return false;
+		return -1;
 	}
 	
 	$products = array();
