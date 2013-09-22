@@ -41,7 +41,7 @@ echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</scri
 include "navbar.php";
 ?>
 
-<div class='container wrapper'>
+<div class='container'>
 	<div id='vis'></div>
 	<div id='sidebar'>
 		<div id='productList'>
