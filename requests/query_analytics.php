@@ -15,7 +15,7 @@ if (!isset($_GET['product_id'])) {
 
 echo 'yo4';
 
-header('Content-type: application/json');
+//header('Content-type: application/json');
 
 $product_id = $_GET['product_id'];
 
