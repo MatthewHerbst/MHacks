@@ -11,6 +11,8 @@ $PASSWORD_MAX_SIZE = 20;
 $PASSWORD_MIN_SIZE = 3;
 $EMAIL_MAX_SIZE = 255;
 $EMAIL_MIN_SIZE = 5;
+
+$USER_PRODUCT_TABLE = 'Model';
 /************** END CONFIGURATION *************/
 
 /*
@@ -159,5 +161,30 @@ function addUser($user, $password, $email = "") {
 	} else {
 		return true;
 	}
+}
+
+/*
+Return a list of products that the user has saved to their account. Returns the list if available, false on error
+*/
+function getUserProducts($user) {
+	global $USER_PRODUCT_TABLE;
+	
+	$sql = "SELECT name FROM (SELECT product_id FROM Model WHERE user_id = '" . $user ."') AS T
+			LEFT OUTER JOIN Products
+			ON T.product_id = Products._id";
+	$q = mysql_query($sql);
+	
+	//Check if there was an error running the query
+	if(mysql_error()) {
+		return false;
+	}
+
+	//Check if the query has results
+	if(!$q) {
+		return false;
+	}
+
+	//Return an array of query results
+	return mysql_fetch_array($q);
 }
 ?>
