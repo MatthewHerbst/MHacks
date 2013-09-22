@@ -176,12 +176,12 @@ function getUserProducts($user) {
 	$q = mysql_query($sql);
 	
 	//Check if there was an error running the query
-	if(mysql_error() != "") {
-		return mysql_error();
-	}
+	/*if(mysql_error()) {
+		return false;
+	}*/
 
 	//Check if the query has no results
-	if(!$q) {
+	if(mysql_num_rows($q) == 0) {
 		return -1;
 	}
 	
