@@ -169,22 +169,28 @@ Return a list of products that the user has saved to their account. Returns the 
 function getUserProducts($user) {
 	global $USER_PRODUCT_TABLE;
 	
-	$sql = "SELECT name FROM (SELECT product_id FROM Model WHERE user_id = '" . $user ."') AS T
-			LEFT OUTER JOIN Products
-			ON T.product_id = Products._id";
-	$q = mysql_query($sql);
+	$sql = "SELECT name FROM 
+				((SELECT product_id FROM Model WHERE user_id = " . $user . ") AS T
+				INNER JOIN Products
+				ON T.product_id = Products._id)";
+	$r = mysql_query($sql);
 	
 	//Check if there was an error running the query
-	if(mysql_error()) {
+	if(!$r) {
 		return false;
 	}
 
-	//Check if the query has results
-	if(!$q) {
-		return false;
+	//Check if the query has no results
+	if(mysql_num_rows($r) == 0) {
+		return -1;
 	}
-
-	//Return an array of query results
-	return mysql_fetch_array($q);
+	
+	$products = array();
+	
+	while($row = mysql_fetch_array($r, MYSQL_NUM)) {
+		$products[] = $row[0];
+	}
+	
+	return $products;
 }
 ?>

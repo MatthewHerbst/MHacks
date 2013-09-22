@@ -49,8 +49,14 @@ include "navbar.php";
 			if(isset($_SESSION['user_pk'])) {
 				$products = getUserProducts($_SESSION['user_pk']);
 				
-				foreach($products as $product) {
-					echo "<div class='product'>" . $product . "</div>";
+				if($products == false) {
+					echo "Error reading product list";
+				} else if($products == -1){
+					echo "You have no saved products";
+				} else {
+					foreach($products as $product) {
+						echo "<div class='product'>" . $product . "</div>";
+					}
 				}
 			} else {
 				echo "Login to view saved products!";
