@@ -2,11 +2,17 @@
 
 $suppress_error_redirect = true;
 
+echo 'yo1';
 require_once('/../secure/db.php');
 
+echo 'yo2';
+
 if (!isset($_GET['product_id'])) {
+	echo 'yo3';
 	exit();
 }
+
+echo 'yo4';
 
 header('Content-type: application/json');
 
