@@ -177,8 +177,7 @@ function getUserProducts($user) {
 	
 	//Check if there was an error running the query
 	if(mysql_error() != "") {
-		print(mysql_error());
-		return false;
+		return mysql_error();
 	}
 
 	//Check if the query has no results
