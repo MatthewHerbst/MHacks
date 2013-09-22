@@ -170,9 +170,9 @@ function getUserProducts($user) {
 	global $USER_PRODUCT_TABLE;
 	
 	$sql = "SELECT name FROM 
-				(SELECT product_id FROM Model WHERE user_id = '" . $user ."') AS T
+				((SELECT product_id FROM Model WHERE user_id = '" . $user . "') AS T
 				LEFT OUTER JOIN Products
-				ON T.product_id = Products._id";
+				ON T.product_id = Products._id)";
 	$q = mysql_query($sql);
 	
 	//Check if there was an error running the query
@@ -184,8 +184,13 @@ function getUserProducts($user) {
 	if(!$q) {
 		return false;
 	}
-
-	//Return an array of query results
-	return mysql_fetch_array($q);
+	
+	$products = array();
+	
+	while($product = mysql_fetch_row($q)) {
+		$products.array_push($product[0]);
+	}
+	
+	return $products;
 }
 ?>

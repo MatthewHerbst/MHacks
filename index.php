@@ -48,7 +48,7 @@ include "navbar.php";
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
 				$products = getUserProducts($_SESSION['user_pk']);
-				var_dump($products);
+				
 				foreach($products as $product) {
 					echo "<div class='product'>" . $product . "</div>";
 				}
