@@ -2,20 +2,14 @@
 
 $suppress_error_redirect = true;
 
-echo 'yo1';
 require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/error_reporting.inc.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/db.php');
 
-echo 'yo2';
-
 if (!isset($_GET['product_id'])) {
-	echo 'yo3';
 	exit();
 }
 
-echo 'yo4';
-
-//header('Content-type: application/json');
+header('Content-type: application/json');
 
 $product_id = $_GET['product_id'];
 
@@ -49,9 +43,9 @@ if (!$result) {
 } else {
 	echo "\"points\": [\n";
 	
-	if (($count = mysql_num_rows($result)) > 0) {
+	if (mysql_num_rows($result) > 0) {
 		while ($point = mysql_fetch_array($result, MYSQL_NUM)) {
-			echo "{ "
+			echo "{ ";
 			echo "\"value\": ";
 			echo $point[0];
 			echo "; ";
