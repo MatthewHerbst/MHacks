@@ -187,10 +187,13 @@ function getUserProducts($user) {
 	
 	$products = array();
 	
+	return $r;
+	
+	/*
 	while($product = mysql_fetch_array($r, MYSQL_NUM)) {
 		$products.array_push($product[0]);
 	}
 	
-	return $products;
+	return $products;*/
 }
 ?>
