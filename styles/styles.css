@@ -1,3 +1,7 @@
+.container {
+	padding-top: 50px;
+}
+
 #vis {
 	padding-top: 50px;
 	display: inline;
