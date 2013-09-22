@@ -173,21 +173,21 @@ function getUserProducts($user) {
 				((SELECT product_id FROM Model WHERE user_id = " . $user . ") AS T
 				INNER JOIN Products
 				ON T.product_id = Products._id)";
-	$q = mysql_query($sql);
+	$r = mysql_query($sql);
 	
 	//Check if there was an error running the query
-	/*if(mysql_error()) {
+	if(!$r) {
 		return false;
-	}*/
+	}
 
 	//Check if the query has no results
-	if(mysql_num_rows($q) == 0) {
+	if(mysql_num_rows($r) == 0) {
 		return -1;
 	}
 	
-	$products = array();
+	$products = new array();
 	
-	while($product = mysql_fetch_row($q)) {
+	while($product = mysql_fetch_row($r)) {
 		$products.array_push($product[0]);
 	}
 	
