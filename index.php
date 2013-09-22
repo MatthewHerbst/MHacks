@@ -92,7 +92,7 @@ include "navbar.php";
 					}
 				}
 			} else {
-				echo "<p>Search for a product!</p>";
+				echo "Search for a product!";
 			}
 			?>
 			</div>
