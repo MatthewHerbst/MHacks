@@ -3,8 +3,8 @@
 $suppress_error_redirect = true;
 
 echo 'yo1';
-require_once('/../secure/error_reporting.inc.php');
-require_once('/../secure/db.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/error_reporting.inc.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '../secure/db.php');
 
 echo 'yo2';
 
