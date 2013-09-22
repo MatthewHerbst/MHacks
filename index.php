@@ -75,15 +75,6 @@ include "navbar.php";
 			?>
 		</div><!--/#productList -->
 		<div id='productSearch'>
-			<div id='search'>
-				<form action='index.php' method='post'>
-					<div class='form-group'>
-						<input type='text' placeholder='Search' name='query' class='form-control'>
-					</div>
-					<button type='submit' class='btn btn-success'>Search</button>
-					<input type='hidden' name='cmd' value='search' />
-				</form>
-			</div>
 			<div id='searchResults'>
 			<?php //Populate the list of products that match the search term
 			if(isset($_POST['cmd']) && $_POST['cmd'] == "search") {
@@ -101,9 +92,18 @@ include "navbar.php";
 					}
 				}
 			} else {
-				echo "<p>You haven't searched for a product yet!</p>";
+				echo "<p>Search for a product!</p>";
 			}
 			?>
+			</div>
+			<div id='search'>
+				<form action='index.php' method='post'>
+					<div class='form-group'>
+						<input type='text' placeholder='Product Search' name='query' class='form-control'>
+					</div>
+					<button type='submit' class='btn btn-success'>Search</button>
+					<input type='hidden' name='cmd' value='search' />
+				</form>
 			</div>
 		</div>
 	</div><!--/#sidebar -->
