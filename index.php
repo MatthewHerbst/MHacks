@@ -84,19 +84,19 @@ include "navbar.php";
 					$products = searchProducts($_POST['query']);
 					
 					if($products == false) {
-						echo "Error reading search list";
+						echo "<p>Error reading search list</p>";
 					} else if($products == -1){
-						echo "No products matched your search :(";
+						echo "<p>No products matched your search :(</p>";
 					} else {
 						foreach($products as $product) {
-							echo "<div class='product'>" . $product . "</div>";
+							echo "<div class='product'><p>" . $product . "</p></div>";
 						}
 					}
 				} else {
-					echo "Search for a product!";
+					echo "<p>You haven't searched for a product yet!</p>";
 				}
 			} else {
-				echo "Login to search for products!";
+				echo "<p>Login to search for products!</p>";
 			}
 			?>
 			</div>

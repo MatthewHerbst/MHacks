@@ -200,7 +200,7 @@ Return a list of product search results
 function searchProducts($searchTerm) {
 	global $USER_PRODUCT_TABLE;
 	
-	$sql = "SELECT name FROM Products WHERE name LIKE %" . $searchTerm . "%";
+	$sql = "SELECT name FROM Products WHERE name LIKE '%" . $searchTerm . "%'";
 	$r = mysql_query($sql);
 	
 	//Check if there was an error running the query
