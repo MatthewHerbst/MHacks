@@ -64,8 +64,10 @@ include "navbar.php";
 				echo "Login to view saved products!";
 			}
 			?>
+			<br />
 		</div><!--/#productList -->
 		<div id='productSearch'>
+			<br />
 			<div id='search'>
 				<form action='index.php' method='post'>
 					<div class='form-group'>
