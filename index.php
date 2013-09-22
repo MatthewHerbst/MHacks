@@ -48,10 +48,10 @@ include "navbar.php";
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
 				$products = getUserProducts($_SESSION['user_pk']);
-				var_dump($products);
-				/*if($products == false) {
-					//echo "Error reading product list";
-				} else*/ if($products == -1){
+				
+				if($products == false) {
+					echo "Error reading product list";
+				} else if($products == -1){
 					echo "You have no saved products";
 				} else {
 					foreach($products as $product) {
