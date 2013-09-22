@@ -27,6 +27,22 @@
 	width: 15%;
 }
 
+#productList {
+	display: inline;
+	float: left;
+	text-align: center;
+	height: 50%;
+	width: 100%;
+}
+
+#productSearch {
+	display: inline;
+	float: left;
+	text-align: center;
+	height: 50%;
+	width: 100%;
+}
+
 /* Vis */
 .states {
   fill: none;
