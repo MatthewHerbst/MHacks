@@ -4,18 +4,20 @@
 
 #vis {
 	padding-top: 50px;
+	float: left;
 	border: 2px solid #000;
 	text-align: center;
 	height: 100%;
-	width: 85%;
+	width: 84%;
 }
 
 #sidebar {
 	padding-top: 50px;
+	float: left;
 	border-bottom: 2px solid #000;
 	text-align: center;
 	height: 100%;
-	width: 15%;
+	width: 14%;
 }
 
 /* Vis */
