@@ -19,6 +19,8 @@ $query =
 		FROM Sentiment AS s 
 		INNER JOIN TwitterStatus AS t 
 			ON t._id = s.status_id 
+			AND s.product_id = ' . 
+			$product_id . ' 
 		INNER JOIN Zipcodes AS z 
 			ON t.city = z.city_id';
 
