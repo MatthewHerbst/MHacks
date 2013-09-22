@@ -3,6 +3,7 @@
 $suppress_error_redirect = true;
 
 echo 'yo1';
+require_once('/../secure/error_reporting.inc.php');
 require_once('/../secure/db.php');
 
 echo 'yo2';
