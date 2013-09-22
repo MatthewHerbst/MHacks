@@ -1,12 +1,45 @@
-.wrapper {
-	min-height: 100%;
+#mainView {
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 46.5px;
 }
 
 #vis {
 	padding-top: 50px;
+	display: inline;
+	float: left;
 	border: 2px solid #000;
 	text-align: center;
 	height: 100%;
+	width: 85%;
+}
+
+#sidebar {
+	padding-top: 50px;
+	display: inline;
+	float: left;
+	border-bottom: 2px solid #000;
+	border-right: 2px solid #000;
+	text-align: center;
+	height: 100%;
+	width: 15%;
+}
+
+#productList {
+	display: inline;
+	float: left;
+	text-align: center;
+	height: 50%;
+	width: 100%;
+}
+
+#productSearch {
+	display: inline;
+	float: left;
+	text-align: center;
+	height: 50%;
 	width: 100%;
 }
 

@@ -1,8 +1,6 @@
 <?php
 include "header.php";
 
-echo "<script type='text/javascript'>alert('" . var_dump($_POST) . "');</script>";
-
 if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 	if(isset($_POST['cmd'])) { //See if the user is requesting anything
 		if($_POST['cmd'] == "logout") { //Check if the user wants to logout
@@ -29,8 +27,6 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 				if($pk != -1) { //Check if that login was a success
 					$_SESSION['user'] = $u;
 					$_SESSION['user_pk'] = $pk;
-					
-					echo "<script type='text/javascript'>alert('Login ok!');</script>";
 				} else {
 					$errorMsg = "Invalid Username/Password";
 				}
@@ -45,11 +41,28 @@ echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</scri
 include "navbar.php";
 ?>
 
-<div class='container wrapper'>
-	<div id='vis'>
-		<h1>Visualization will go here! Please work!</h1>
-	</div>
-</div>
+<div class='container'>
+	<div id='vis'></div>
+	<div id='sidebar'>
+		<div id='productList'>
+			<?php //Populate the list of products belonging to this user
+			if(isset($_SESSION['user_pk'])) {
+				$products = getUserProducts($_SESSION['user_pk']);
+				
+				foreach($products as $product) {
+					echo "<div class='product'>" . $product . "</div>";
+				}
+			} else {
+				echo "Login to view saved products!";
+			}
+			?>
+		</div><!--/#productList -->
+		<div id='productSearch'>
+			<div id='search'></div>
+			<div id='searchResults'></div>
+		</div>
+	</div><!--/#sidebar -->
+</div><!--/.container wrapper -->
 
 <script type='text/javascript'>
 var width = 960,
