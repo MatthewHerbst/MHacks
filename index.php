@@ -44,6 +44,15 @@ include "navbar.php";
 <div class='container'>
 	<div id='vis'></div>
 	<div id='sidebar'>
+		<div id='currentProduct'>
+		<?php
+		if(isset($_SESSION['currProduct'])) {
+			echo $_SESSION['currProduct'];
+		} else {
+			echo "<p>No product currently selected</p>";
+		}
+		?>
+		</div>
 		<div id='productList'>
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
@@ -64,10 +73,8 @@ include "navbar.php";
 				echo "Login to view saved products!";
 			}
 			?>
-			<br />
 		</div><!--/#productList -->
 		<div id='productSearch'>
-			<br />
 			<div id='search'>
 				<form action='index.php' method='post'>
 					<div class='form-group'>
@@ -79,26 +86,22 @@ include "navbar.php";
 			</div>
 			<div id='searchResults'>
 			<?php //Populate the list of products that match the search term
-			if(isset($_SESSION['user_pk'])) {
-				if(isset($_POST['cmd']) && $_POST['cmd'] == "search") {
-					echo "<h3>Search Results</h3>";
+			if(isset($_POST['cmd']) && $_POST['cmd'] == "search") {
+				echo "<h3>Search Results</h3>";
+			
+				$products = searchProducts($_POST['query']);
 				
-					$products = searchProducts($_POST['query']);
-					
-					if($products == false) {
-						echo "<p>Error reading search list</p>";
-					} else if($products == -1){
-						echo "<p>No products matched your search :(</p>";
-					} else {
-						foreach($products as $product) {
-							echo "<div class='product'><p>" . $product . "</p></div>";
-						}
-					}
+				if($products == false) {
+					echo "<p>Error reading search list</p>";
+				} else if($products == -1){
+					echo "<p>No products matched your search :(</p>";
 				} else {
-					echo "<p>You haven't searched for a product yet!</p>";
+					foreach($products as $product) {
+						echo "<div class='product'><p>" . $product . "</p></div>";
+					}
 				}
 			} else {
-				echo "<p>Login to search for products!</p>";
+				echo "<p>You haven't searched for a product yet!</p>";
 			}
 			?>
 			</div>
