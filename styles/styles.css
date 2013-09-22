@@ -1,5 +1,9 @@
-.container {
-	padding-top: 50px;
+#mainView {
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 46.5px;
 }
 
 #vis {
