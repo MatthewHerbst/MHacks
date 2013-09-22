@@ -41,18 +41,18 @@ echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</scri
 include "navbar.php";
 ?>
 
+<script type='text/javascript'>
+	function showProductInfo(var productName) {
+		var currProdDiv = document.getElementById('currentProduct');
+		
+		currProdDiv.innerHTML = productName;
+	};
+</script>
+
 <div class='container'>
 	<div id='vis'></div>
 	<div id='sidebar'>
-		<div id='currentProduct'>
-		<?php
-		if(isset($_SESSION['currProduct'])) {
-			echo $_SESSION['currProduct'];
-		} else {
-			echo "<p>No product currently selected</p>";
-		}
-		?>
-		</div>
+		<div id='currentProduct'><p>No product currently selected</p></div>
 		<div id='productList'>
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
@@ -88,7 +88,7 @@ include "navbar.php";
 					echo "<p>No products matched your search :(</p>";
 				} else {
 					foreach($products as $product) {
-						echo "<div class='product'><p>" . $product . "</p></div>";
+						echo "<div class='product'><a onclick=showProductInfo('" . $product . "')><p>" . $product . "</p></a></div>";
 					}
 				}
 			} else {
