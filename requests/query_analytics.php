@@ -4,13 +4,13 @@ $suppress_error_redirect = true;
 
 require_once('/../secure/db.php');
 
-if (!isset($_POST['product_id'])) {
+if (!isset($_GET['product_id'])) {
 	exit();
 }
 
 header('Content-type: application/json');
 
-$product_id = $_POST['product_id'];
+$product_id = $_GET['product_id'];
 
 connectDB();
 
