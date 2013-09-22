@@ -29,7 +29,7 @@ echo "<!DOCTYPE html><html lang='en'><head>";
 //Basic header info
 echo "<meta name='author' content='Matthew Herbst'>
 		<meta charset='utf-8'>
-		<title>MHacks</title>";
+		<title>Profit Maker 3000</title>";
 
 //Global imports
 echo "<link rel='stylesheet' type='text/css' href='styles/styles.css'>

@@ -4,6 +4,6 @@
 */
 
 //Basic footer tags
-echo "</body></html>";
+echo "<br /><p>Developed at MHacks Fall 2013 By Matthew Herbst, Tanmay Mathur, Kyle Oswald, and Nat Shapiro</p></body></html>";
 
 ?>

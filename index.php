@@ -35,24 +35,22 @@ if(isset($_SESSION['user_pk'])) { //See if this person has an open session
 	}
 }
 
-//Give the error message over to the JavaScript to deal with displaying it
+//Give the error message over to the JavaScript to deal with displaying it.
 echo "<script type='text/javascript'>var errorMessage = " . $errorMsg . ";</script>";
 
 include "navbar.php";
 ?>
 
+<script type='text/javascript'>
+	function showProductInfo(var productName) {
+		document.getElementById('currentProduct').innerHTML = productName;
+	};
+</script>
+
 <div class='container'>
 	<div id='vis'></div>
 	<div id='sidebar'>
-		<div id='currentProduct'>
-		<?php
-		if(isset($_SESSION['currProduct'])) {
-			echo $_SESSION['currProduct'];
-		} else {
-			echo "<p>No product currently selected</p>";
-		}
-		?>
-		</div>
+		<div id='currentProduct'><p>No product currently selected</p></div>
 		<div id='productList'>
 			<?php //Populate the list of products belonging to this user
 			if(isset($_SESSION['user_pk'])) {
@@ -75,15 +73,6 @@ include "navbar.php";
 			?>
 		</div><!--/#productList -->
 		<div id='productSearch'>
-			<div id='search'>
-				<form action='index.php' method='post'>
-					<div class='form-group'>
-						<input type='text' placeholder='Search' name='query' class='form-control'>
-					</div>
-					<button type='submit' class='btn btn-success'>Search</button>
-					<input type='hidden' name='cmd' value='search' />
-				</form>
-			</div>
 			<div id='searchResults'>
 			<?php //Populate the list of products that match the search term
 			if(isset($_POST['cmd']) && $_POST['cmd'] == "search") {
@@ -97,13 +86,22 @@ include "navbar.php";
 					echo "<p>No products matched your search :(</p>";
 				} else {
 					foreach($products as $product) {
-						echo "<div class='product'><p>" . $product . "</p></div>";
+						echo "<div class='product'><a onclick=showProductInfo('" . $product . "')><p>" . $product . "</p></a></div>";
 					}
 				}
 			} else {
-				echo "<p>You haven't searched for a product yet!</p>";
+				echo "Search for a product!";
 			}
 			?>
+			</div>
+			<div id='search'>
+				<form action='index.php' method='post'>
+					<div class='form-group'>
+						<input type='text' placeholder='Product Search' name='query' class='form-control'>
+					</div>
+					<button type='submit' class='btn btn-success'>Search</button>
+					<input type='hidden' name='cmd' value='search' />
+				</form>
 			</div>
 		</div>
 	</div><!--/#sidebar -->
